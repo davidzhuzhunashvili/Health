@@ -1,0 +1,21 @@
+<!-- Order of events:
+  -Webpack runs
+  #Meanwhile on request index.html is served because of app.use(express.static)
+  #Initally index.html has nothing inside of it and returns an empty html page
+  -Starts looking from main.js and looks at all dependancies
+  -Bundles everything together and also uses babel to produce ES5 code
+  -Loads the full js file into the script
+  -Runs the script (first thing to run is the render of app.js in main.js)
+  -Components start to appear on the empty index.html (/) page
+-->
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <!-- Render app.js at this point which will render new components -->
+  <div id="mount-point"></div>
+  <!-- Webpack will create a bundle.js in memory at this location -->
+  <script src="./bundle.js"></script>
+</body>
+</html>
