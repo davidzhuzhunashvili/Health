@@ -1,0 +1,71 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+#searchBox {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+/* Row/columns */
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  padding: 1%;
+  margin: 0;
+}
+
+/* Search box and button */
+#search-input {
+  width: 82%;
+  margin-left: 1%;
+  border: 0.5px solid grey;
+  padding: 10px;
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+#search-button {
+  position: relative;
+  width: 12%;
+  margin-right: 2.5%;
+  background: #2196F3;
+  color: white;
+  cursor: pointer;
+  border: 0.5px solid grey;
+  border-left: none;
+  height: 2.6rem;
+  vertical-align: middle;
+}
+
+#search-button i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+#search-input::placeholder {
+  color: grey;
+}
+
+/* Dropdown */
+.Select {
+  margin-left: 1%; 
+  width: 94%;
+  /* background: #f1f1f1;  */
+  /* border-radius: 0.5px; */
+}
+
+/* Calories info */
+
+
+/* Remove focus outlines */
+#search-input:focus, #search-button:focus, #select-food .Select {
+  outline: none;
+}
+
+
+

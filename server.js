@@ -13,7 +13,7 @@ const nutrition = require('./server/routes/nutrition')
 
 /* Mongoose setup */
 mongoose.connect(databaseURL)
-mongoose.connection.once('open', () => console.log('Connected to Database!'))
+mongoose.connection.once('open', () => { console.log('Connected to Database!') })
 
 /* Serve files from ./www */
 app.use(express.static(__dirname + '/www'))
@@ -39,5 +39,5 @@ app.use('/nutrition', nutrition)
 
 
 
-
-app.listen(3000, () => console.log('Listening on port 3000!'))
+app.get('*', (req, res) => { res.sendFile(__dirname + '/www/index.html') })
+app.listen(3000, () => { console.log('Listening on port 3000!') })
