@@ -4,22 +4,24 @@
   width: 50%;
   display: flex;
   flex-direction: column;
+  border: 0.5px solid grey;
+  margin: auto;
 }
 /* Row/columns */
 .row {
   display: flex;
 }
 
-.column {
+.column-0, .column-1 {
   flex: 50%;
-  padding: 1%;
+  padding: 2%;
   margin: 0;
 }
 
 /* Search box and button */
 #search-input {
-  width: 82%;
-  margin-left: 1%;
+  width: 88%;
+  /* margin-left: 1%; */
   border: 0.5px solid grey;
   padding: 10px;
   font-size: 1.1rem;
@@ -29,13 +31,13 @@
 #search-button {
   position: relative;
   width: 12%;
-  margin-right: 2.5%;
+  /* margin-right: 2.5%; */
   background: #2196F3;
   color: white;
   cursor: pointer;
   border: 0.5px solid grey;
   border-left: none;
-  height: 2.6rem;
+  height: 42px;
   vertical-align: middle;
 }
 
@@ -53,17 +55,90 @@
 
 /* Dropdown */
 .Select {
-  margin-left: 1%; 
-  width: 94%;
+  /* margin-left: 1%;  */
+  width: 100%;
+  margin-bottom: 0;
   /* background: #f1f1f1;  */
   /* border-radius: 0.5px; */
 }
 
 /* Calories info */
 
+#calories {
+  font-size: 2.6rem;
+  /* background: blue; */
+  text-align: right;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
+#amount-input {
+  width: 83%;
+  margin-left: 0%;
+  border: 0.5px solid grey;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 10px 0;
+  border: 0.5px solid grey;
+  border-right: none;
+  margin-bottom: 0;
+  text-align: right;
+  height: 36px;
+}
+
+#plus-button {
+  position: relative;
+  width: 12%;
+  background: #2196F3;
+  color: white;
+  cursor: pointer;
+  border: 0.5px solid grey;
+  border-left: none;
+  height: 36;
+  vertical-align: middle;
+}
+
+#plus-button i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+.amount p {
+  display: inline-block;
+  background: #f1f1f1;
+  width: 5%;
+  margin: 0;
+  padding-top: 8px;
+  padding-bottom: 9px;
+  border: 0.5px solid grey;
+  text-align: center;
+}
+
+.amount form {
+  margin-bottom: 0;
+}
+
+/* Remove number arrows in input */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
 
 /* Remove focus outlines */
-#search-input:focus, #search-button:focus, #select-food .Select {
+#search-input:focus,
+#search-button:focus,
+#select-food .Select,
+#amount-input,
+#plus-button
+{
   outline: none;
 }
 

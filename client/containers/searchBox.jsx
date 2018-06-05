@@ -1,6 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import Select from 'react-select'
+
+import { addCalorie } from '../actions/caloriesActions'
 
 import '../css/searchBox.css'
 import '../css/react-select.css'
@@ -12,24 +15,42 @@ class SearchBox extends React.Component {
       searchResults: [],
       query: '',
       selectedOption: '',
-      disabled: true
-
+      selectDisabled: true,
+      amount: 100,
+      calories: ''
     }
   }
 
-  handleSubmit = (event) => {
+  handleSelection = (selectedOption) => {
+    const calories = this.state.searchResults[selectedOption.value].nutrients['208'].value
+
+    this.setState({ 
+      selectedOption,
+      calories: parseInt(calories)/100
+    })
+  }
+
+  handleSearchChange = (event) => {
+    this.setState({ query: event.target.value })
+  }
+
+
+  handleSearchSubmit = (event) => {
     axios.get('/nutrition', { params: { query: this.state.query } }).then((res) => {
       if (res.data.length > 0) {
+        const calories = res.data[0].nutrients['208'].value 
         this.setState({
           searchResults: res.data,
-          disabled: false,
-          selectedOption: { label: res.data[0].name, value: 0, className: 'select-options' }
+          selectDisabled: false,
+          selectedOption: { label: res.data[0].name, value: 0, className: 'select-options' },
+          calories: parseInt(calories)/100
         })
       } else {
         this.setState({
           searchResults: res.data,
-          disabled: true,
-          selectedOption: ''
+          selectDisabled: true,
+          selectedOption: '',
+          calories: '',
         })
       }
     })
@@ -37,12 +58,15 @@ class SearchBox extends React.Component {
     event.preventDefault()
   }
 
-  handleChange = (event) => {
-    this.setState({ query: event.target.value })
+  handleAmountChange = (event) => {
+    this.setState({ amount: event.target.value })
   }
 
-  handleSelection = (selectedOption) => {
-    this.setState({ selectedOption })
+  handlePlusSubmit = (event) => {
+    if(typeof this.state.calories === 'number' && !isNaN(this.state.calories)) {
+      this.props.addCalorie(this.state.calories*this.state.amount)
+    }
+    event.preventDefault()
   }
 
   render() {
@@ -55,10 +79,10 @@ class SearchBox extends React.Component {
     return (
       <div id='searchBox'>
         <div className='row'>
-          <div className='column' style={{ background: 'white' }}>
+          <div className='column-0'>
             <div className='search-container'>
-              <form onSubmit={this.handleSubmit}>
-                <input id='search-input' type='text' autoComplete='off' placeholder='Search...' name='search' value={this.state.query} onChange={this.handleChange} />
+              <form onSubmit={this.handleSearchSubmit}>
+                <input id='search-input' type='text' autoComplete='off' placeholder='Search...' name='search' value={this.state.query} onChange={this.handleSearchChange} />
                 <button id='search-button' type='submit'>
                   <i className="fa fa-search"></i>
                 </button>
@@ -73,16 +97,26 @@ class SearchBox extends React.Component {
                 options={options}
                 searchable={false}
                 clearable={false}
-                disabled={this.state.disabled}
+                disabled={this.state.selectDisabled}
               />
             </div>
           </div>
-          <div className='column' style={{ background: 'grey' }}>
+          <div className='column-1'>
             <div className='nutrition-info'>
-              <p id='calories'>{(this.state.searchResults.length > 0 && this.state.selectedOption) ?
-                this.state.searchResults[this.state.selectedOption.value].nutrients['208']
-                  .value + ' Calories' : 'nothing yet'}
+              <p id='calories'>
+                {(typeof this.state.calories === 'number' && !isNaN(this.state.calories)) ? Math.round(this.state.amount*this.state.calories*100)/100 
+                  + ' calories' : '---'}
               </p>
+            </div>
+
+            <div className='amount'>
+              <form onSubmit={this.handlePlusSubmit}>
+                <input id='amount-input' type='number' autoComplete='off' name='search' value={this.state.amount} onChange={this.handleAmountChange} />
+                <p>g</p>
+                <button id='plus-button' type='submit'>
+                  <i className="fa fa-plus"></i>
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -91,4 +125,18 @@ class SearchBox extends React.Component {
   }
 }
 
-export default SearchBox
+const mapStateToProps = (state) => {
+  return {
+    calories: state.calories
+  }  
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCalorie: (calorie) => {
+      dispatch(addCalorie(calorie))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBox)

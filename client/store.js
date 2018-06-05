@@ -1,16 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 
-// IMPORT REDUCERS
-// import x from './reducers/y'
+/* IMPORT REDUCERS */
+import calories from './reducers/caloriesReducer'
 
-/*
 export default createStore(
   combineReducers({
-    x,
-    y
+    calories
   }),
   {},
-  applyMiddleware(logger())
+  applyMiddleware(createLogger())
 )
-*/
