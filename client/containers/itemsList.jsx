@@ -1,5 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { removeCalorie } from '../actions/caloriesActions'
+
+import SearchBox from './searchBox'
+
+import '../css/itemsList.css'
 
 class ItemList extends React.Component {
   constructor(props) {
@@ -9,15 +14,33 @@ class ItemList extends React.Component {
     }
   }
 
+  handleX = (index) => {
+    this.props.removeCalorie(index)
+  }
+
   render() {
-    console.log(this.props)
+    const caloriesList = this.props.calories.caloriesList
 
     return (
-      <p>HI</p>
+      <div id='itemsList'>
+        <div className='title-container'>
+          <p>Items List</p>
+        </div>
+
+        <div className='list-container'>
+          {caloriesList.map((calorie, index) => {
+            return (
+              <div className='item-container' key={index}>
+                <p>{calorie}</p>
+                <i className="far fa-times-circle" onClick={() => this.handleX(index)}></i>
+              </div>
+            )
+          })}
+        </div>
+      </div>
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {
@@ -27,7 +50,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    //removeCalorie: (calorie) => { dispatch(removeCalorie(calorie)) }
+    removeCalorie: (calorie) => {
+      dispatch(removeCalorie(calorie))
+    }
   }
 }
 

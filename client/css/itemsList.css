@@ -1,0 +1,40 @@
+@import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css");
+
+#itemsList {
+  width: 73%;
+  margin: auto;
+}
+
+.item-container {
+  position: relative;
+  border: 0.5px solid rgb(155, 255, 155);
+  margin: 1% 0;
+  border-radius: 4px;
+}
+
+.item-container p {
+  display: inline-block;
+  font-size: 1.5rem;
+  padding-left: 1%;
+  margin: 0;
+}
+
+.item-container i {
+  position: absolute;
+  color: rgb(255, 66, 66);
+  top: 50%;
+  right: 1%;
+  transform: translateY(-50%); 
+  font-size: 1.2rem;
+  -webkit-backface-visibility: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+
+.item-container:hover i {
+  visibility: visible;
+  opacity: 1;
+}
+
+

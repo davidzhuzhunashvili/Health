@@ -1,0 +1,11 @@
+.total-container p {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.remaining-container p {
+  text-align: center;
+  font-size: 2rem;
+  /* margin: calc(2rem - 1%) */
+}

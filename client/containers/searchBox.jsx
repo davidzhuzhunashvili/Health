@@ -24,9 +24,9 @@ class SearchBox extends React.Component {
   handleSelection = (selectedOption) => {
     const calories = this.state.searchResults[selectedOption.value].nutrients['208'].value
 
-    this.setState({ 
+    this.setState({
       selectedOption,
-      calories: parseInt(calories)/100
+      calories: parseInt(calories) / 100
     })
   }
 
@@ -38,12 +38,12 @@ class SearchBox extends React.Component {
   handleSearchSubmit = (event) => {
     axios.get('/nutrition', { params: { query: this.state.query } }).then((res) => {
       if (res.data.length > 0) {
-        const calories = res.data[0].nutrients['208'].value 
+        const calories = res.data[0].nutrients['208'].value
         this.setState({
           searchResults: res.data,
           selectDisabled: false,
           selectedOption: { label: res.data[0].name, value: 0, className: 'select-options' },
-          calories: parseInt(calories)/100
+          calories: parseInt(calories) / 100
         })
       } else {
         this.setState({
@@ -63,8 +63,8 @@ class SearchBox extends React.Component {
   }
 
   handlePlusSubmit = (event) => {
-    if(typeof this.state.calories === 'number' && !isNaN(this.state.calories)) {
-      this.props.addCalorie(this.state.calories*this.state.amount)
+    if (typeof this.state.calories === 'number' && !isNaN(this.state.calories)) {
+      this.props.addCalorie(this.state.calories * this.state.amount)
     }
     event.preventDefault()
   }
@@ -104,14 +104,14 @@ class SearchBox extends React.Component {
           <div className='column-1'>
             <div className='nutrition-info'>
               <p id='calories'>
-                {(typeof this.state.calories === 'number' && !isNaN(this.state.calories)) ? Math.round(this.state.amount*this.state.calories*100)/100 
+                {(typeof this.state.calories === 'number' && !isNaN(this.state.calories)) ? Math.round(this.state.amount * this.state.calories * 100) / 100
                   + ' calories' : '---'}
               </p>
             </div>
 
             <div className='amount'>
               <form onSubmit={this.handlePlusSubmit}>
-                <input id='amount-input' type='number' autoComplete='off' name='search' value={this.state.amount} onChange={this.handleAmountChange} />
+                <input id='amount-input' type='number' autoComplete='off' min='0' max='10000' name='search' value={this.state.amount} onChange={this.handleAmountChange} />
                 <p>g</p>
                 <button id='plus-button' type='submit'>
                   <i className="fa fa-plus"></i>
@@ -128,7 +128,7 @@ class SearchBox extends React.Component {
 const mapStateToProps = (state) => {
   return {
     calories: state.calories
-  }  
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -138,5 +138,6 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox)

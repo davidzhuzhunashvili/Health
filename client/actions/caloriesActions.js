@@ -1,8 +1,15 @@
 const addCalorie = (calorie) => {
   return {
     type: 'ADD',
-    payload: calorie 
+    payload: calorie
   }
 }
 
-export { addCalorie }
+const removeCalorie = (index) => {
+  return {
+    type: 'REMOVE',
+    payload: index
+  }
+}
+
+export { addCalorie, removeCalorie }
