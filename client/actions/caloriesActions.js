@@ -12,4 +12,11 @@ const removeCalorie = (index) => {
   }
 }
 
-export { addCalorie, removeCalorie }
+const toggleEnabled = (index) => {
+  return {
+    type: 'TOGGLE',
+    payload: index
+  }
+}
+
+export { addCalorie, removeCalorie, toggleEnabled }

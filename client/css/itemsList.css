@@ -2,21 +2,64 @@
 
 #itemsList {
   width: 73%;
-  margin: auto;
+  margin: 0 auto 1% auto;
+  height: 50em;
+  overflow-y: scroll;
+}
+
+p:hover {
+  cursor: default;
+}
+
+.item-and-description {
+  /* background: red; */
 }
 
 .item-container {
   position: relative;
-  border: 0.5px solid rgb(155, 255, 155);
-  margin: 1% 0;
+  border: 0.5px solid rgb(199, 199, 199);
+  margin: 0.5% 0;
   border-radius: 4px;
+  height: 2rem;
+  background: #d6d6d6;
 }
 
-.item-container p {
+.name {
   display: inline-block;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding-left: 1%;
   margin: 0;
+  vertical-align: middle;
+  line-height: 2rem;
+  width: 60%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.vr {
+  display: inline-block;
+  border-left: 1px solid rgb(124, 124, 124);
+  height: 1.7rem;
+  margin: 0 2%;
+  vertical-align: middle;
+
+}
+
+.calories {
+  display: inline-block;
+  font-size: 1.3rem;
+  margin: 0;
+  vertical-align: middle;
+  line-height: 2rem;
+}
+
+.list-amount {
+  display: inline-block;
+  font-size: 1.3rem;
+  margin: 0;
+  vertical-align: middle;
+  line-height: 2rem;
 }
 
 .item-container i {
@@ -35,6 +78,32 @@
 .item-container:hover i {
   visibility: visible;
   opacity: 1;
+  cursor: pointer;
 }
 
+p.left-align {
+  display: inline-block;
+  width: 50%;
+  margin: 3px 0;
+}
 
+p.right-align {
+  display: inline-block;
+  text-align: right;
+  width: 50%;
+  margin: 3px 0;
+}
+
+.description-container {
+  display: flex;
+  width: 100%;
+  padding: 0 1%;
+}
+
+.left {
+  flex: 50%;
+}
+
+.right {
+  flex: 50%;
+}

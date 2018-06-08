@@ -15,7 +15,7 @@ class Totals extends React.Component {
 
   render() {
     const caloriesList = this.props.calories.caloriesList
-    const totalCals = (caloriesList.length > 0) ? caloriesList.reduce((x, y) => x + y) : 0
+    const totalCals = caloriesList.reduce((x, y) => x + y.calories, 0)
 
     return (
       <div className='totals'>

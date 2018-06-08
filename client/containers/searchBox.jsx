@@ -64,7 +64,12 @@ class SearchBox extends React.Component {
 
   handlePlusSubmit = (event) => {
     if (typeof this.state.calories === 'number' && !isNaN(this.state.calories)) {
-      this.props.addCalorie(this.state.calories * this.state.amount)
+      this.props.addCalorie({
+        calories: this.state.calories * this.state.amount,
+        amount: this.state.amount*1,
+        info: this.state.searchResults[this.state.selectedOption.value],
+        enabled: false
+      })
     }
     event.preventDefault()
   }
