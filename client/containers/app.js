@@ -6,6 +6,7 @@ import axios from 'axios'
 
 import LandingPage from './landingPage'
 import ErrorPage from '../components/errorPage'
+import AccountPage from '../containers/accountPage'
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path='/' render={() => <LandingPage />} />
+            <Route exact path='/account' render={() => <AccountPage />} />
             <Route render={(props) => <ErrorPage props={props} />} />
           </Switch>
         </div>

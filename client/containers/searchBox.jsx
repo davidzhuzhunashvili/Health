@@ -4,6 +4,7 @@ import axios from 'axios'
 import Select from 'react-select'
 
 import { addCalorie } from '../actions/caloriesActions'
+import { setSelected } from '../actions/selectedActions'
 
 import '../css/searchBox.css'
 import '../css/react-select.css'
@@ -22,12 +23,18 @@ class SearchBox extends React.Component {
   }
 
   handleSelection = (selectedOption) => {
-    const calories = this.state.searchResults[selectedOption.value].nutrients['208'].value
+    const selection = this.state.searchResults[selectedOption.value]
 
     this.setState({
       selectedOption,
-      calories: parseInt(calories) / 100
+      calories: parseInt(selection.nutrients['208'].value) / 100
     })
+
+    if (this.props.style === 'generic') {
+      this.props.setSelected({
+        item: selection
+      })
+    }
   }
 
   handleSearchChange = (event) => {
@@ -45,6 +52,12 @@ class SearchBox extends React.Component {
           selectedOption: { label: res.data[0].name, value: 0, className: 'select-options' },
           calories: parseInt(calories) / 100
         })
+        if (this.props.style === 'generic') {
+          this.props.setSelected({
+            item: res.data[0],
+            amount: this.state.amount
+          })
+        }
       } else {
         this.setState({
           searchResults: res.data,
@@ -60,18 +73,30 @@ class SearchBox extends React.Component {
 
   handleAmountChange = (event) => {
     this.setState({ amount: event.target.value })
+
+    if (this.props.style === 'generic') {
+      this.props.setSelected({
+        amount: event.target.value
+      })
+    }
   }
 
   handlePlusSubmit = (event) => {
-    if (typeof this.state.calories === 'number' && !isNaN(this.state.calories)) {
+    if (typeof this.state.calories === 'number' && !isNaN(this.state.calories) && this.props.style !== 'generic') {
       this.props.addCalorie({
         calories: this.state.calories * this.state.amount,
-        amount: this.state.amount*1,
+        amount: this.state.amount * 1,
         info: this.state.searchResults[this.state.selectedOption.value],
         enabled: false
       })
     }
     event.preventDefault()
+  }
+
+  componentDidMount() {
+    if (this.props.style === 'generic') {
+      this.props.setSelected({ item: '', amount: 100 })
+    }
   }
 
   render() {
@@ -108,19 +133,25 @@ class SearchBox extends React.Component {
           </div>
           <div className='column-1'>
             <div className='nutrition-info'>
-              <p id='calories'>
-                {(typeof this.state.calories === 'number' && !isNaN(this.state.calories)) ? Math.round(this.state.amount * this.state.calories * 100) / 100
-                  + ' calories' : '---'}
-              </p>
+                {(typeof this.state.calories === 'number' && !isNaN(this.state.calories)) ?
+                  <div id='calories'>
+                    <p id='calories-value'>{Math.round(this.state.amount * this.state.calories * 100) / 100}</p>
+                    <p id='calories-word'>calories</p>
+                  </div>
+                  : 
+                  <div id='calories'>
+                    <p id='dashes'>---</p>
+                  </div>}
             </div>
 
             <div className='amount'>
               <form onSubmit={this.handlePlusSubmit}>
-                <input id='amount-input' type='number' autoComplete='off' min='0' max='10000' name='search' value={this.state.amount} onChange={this.handleAmountChange} />
+                <input id={(this.props.style !== 'generic') ? 'amount-input' : 'amount-input-generic'} type='number' autoComplete='off' min='0' max='10000' name='search' value={this.state.amount} onChange={this.handleAmountChange} />
                 <p>g</p>
-                <button id='plus-button' type='submit'>
-                  <i className="fa fa-plus"></i>
-                </button>
+                {(this.props.style !== 'generic') ?
+                  <button id='plus-button' type='submit'>
+                    <i className="fa fa-plus"></i>
+                  </button> : ''}
               </form>
             </div>
           </div>
@@ -132,7 +163,8 @@ class SearchBox extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    calories: state.calories
+    calories: state.calories,
+    selected: state.selected
   }
 }
 
@@ -140,7 +172,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addCalorie: (calorie) => {
       dispatch(addCalorie(calorie))
-    }
+    },
+    setSelected: (item) => {
+      dispatch(setSelected(item))
+    },
   }
 }
 

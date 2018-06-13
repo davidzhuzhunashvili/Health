@@ -5,7 +5,7 @@ const calorieReducer = (state = { caloriesList: [] }, action) => {
         ...state,
         caloriesList: [action.payload, ...state.caloriesList]
       }
-      break;
+      break
 
     case 'REMOVE':
       state = {
@@ -15,7 +15,7 @@ const calorieReducer = (state = { caloriesList: [] }, action) => {
           ...state.caloriesList.slice(action.payload + 1)
         ]
       }
-      break;
+      break
 
     case 'TOGGLE':
       /* USE THIS ONCE FUNCTIONS ARE ADDED */
@@ -39,6 +39,7 @@ const calorieReducer = (state = { caloriesList: [] }, action) => {
           ...state.caloriesList.slice(action.payload + 1)
         ]
       }
+      break
   }
 
   return state

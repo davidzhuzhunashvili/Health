@@ -40,4 +40,6 @@ app.use('/nutrition', nutrition)
 
 
 app.get('*', (req, res) => { res.sendFile(__dirname + '/www/index.html') })
-app.listen(3000, () => { console.log('Listening on port 3000!') })
+app.listen(process.argv[2] || 3000, () => { 
+  console.log(`Listening on port ${process.argv[2] || 3000}`) 
+})

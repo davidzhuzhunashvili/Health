@@ -60,18 +60,63 @@
 }
 
 /* Calories info */
-#calories {
-  font-size: 2.6rem;
+/* #calories { */
+  /* display: inline-block; */
+  /* width: 100%; */
+  /* font-size: 2.6rem; */
   /* background: blue; */
-  text-align: right;
-  flex-direction: row-reverse;
-  justify-content: space-between;
+  /* text-align: right; */
+  /* flex-direction: row-reverse; */
+  /* justify-content: space-between; */
+  /* padding: 0; */
+  /* margin: 0; */
+/* } */
+#calories {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#calories p {
+  font-size: 2.6rem;
   padding: 0;
   margin: 0;
+  display: inline-block;
+  text-align: right;
+}
+
+#calories-value {
+  width: 70%;
+  box-sizing: border-box;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+#calories-word {
+  width: 30%;
+}
+
+#dashes {
+  width: 100%;
 }
 
 #amount-input {
   width: 83%;
+  margin-left: 0%;
+  border: 0.5px solid grey;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 10px 0;
+  border: 0.5px solid grey;
+  border-right: none;
+  margin-bottom: 0;
+  text-align: right;
+  height: 36px;
+  vertical-align: bottom;
+}
+
+#amount-input-generic {
+  width: 95%;
   margin-left: 0%;
   border: 0.5px solid grey;
   padding: 10px;
@@ -135,7 +180,8 @@ input[type=number]::-webkit-outer-spin-button {
 #search-button:focus,
 #select-food .Select,
 #amount-input,
-#plus-button
+#plus-button,
+#amount-input-generic
 {
   outline: none;
 }

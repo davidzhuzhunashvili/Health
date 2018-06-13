@@ -1,11 +1,11 @@
 import React from 'react'
 
+import '../css/errorPage.css'
+
 const ErrorPage = (props) => {
-  console.log(props)
   return (
-    <div>
-      <h1>ERROR 404: PAGE NOT FOUND</h1>
-      <h1>COULD NOT GET: {props.props.location.pathname}</h1>
+    <div id='error'>
+      <h1>ERROR 404: COULD NOT GET {props.props.location.pathname}</h1>
       {/* <h1>COULD NOT GET: {window.location.href}</h1> */}
     </div>
   )

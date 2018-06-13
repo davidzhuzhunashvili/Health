@@ -15,7 +15,8 @@ class Totals extends React.Component {
 
   render() {
     const caloriesList = this.props.calories.caloriesList
-    const totalCals = caloriesList.reduce((x, y) => x + y.calories, 0)
+    const totalCals = (Math.round(caloriesList.reduce((x, y) => x + y.calories, 0)*100)/100).toFixed(2)
+    const remainingCals = (Math.round((this.state.max - totalCals)*100)/100).toFixed(2)
 
     return (
       <div className='totals'>
@@ -24,7 +25,7 @@ class Totals extends React.Component {
         </div>
 
         <div className='remaining-container'>
-          <p>Remaining: {this.state.max - totalCals}</p>
+          <p>Remaining: {remainingCals}</p>
         </div>
       </div>
     )

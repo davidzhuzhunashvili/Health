@@ -4,7 +4,7 @@
   width: 73%;
   margin: 0 auto 1% auto;
   height: 50em;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 p:hover {
@@ -79,31 +79,4 @@ p:hover {
   visibility: visible;
   opacity: 1;
   cursor: pointer;
-}
-
-p.left-align {
-  display: inline-block;
-  width: 50%;
-  margin: 3px 0;
-}
-
-p.right-align {
-  display: inline-block;
-  text-align: right;
-  width: 50%;
-  margin: 3px 0;
-}
-
-.description-container {
-  display: flex;
-  width: 100%;
-  padding: 0 1%;
-}
-
-.left {
-  flex: 50%;
-}
-
-.right {
-  flex: 50%;
 }
