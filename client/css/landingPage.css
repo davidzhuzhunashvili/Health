@@ -17,6 +17,12 @@ html {
   overflow: scroll;
   overflow-x: hidden;
 }
+
+#search p {
+  font-size: 4rem;
+  text-align: center;
+}
+
 ::-webkit-scrollbar {
   width: 0px;  /* remove scrollbar space */
   background: transparent;  /* optional: just make scrollbar invisible */

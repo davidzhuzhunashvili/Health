@@ -13,12 +13,13 @@ import Description from '../components/description'
 import '../css/landingPage.css'
 
 class LandingPage extends React.Component {
-
-
   render() {
     return (
       <div>
         <TopBar />
+        <div id='search'>
+          <p>Search</p>
+        </div>
         <SearchBox style='generic' />
         <div className='landing-page-description'>
           <Description item={this.props.selected} />

@@ -6,6 +6,7 @@ const API = require('../api/api-interface')
 
 
 router.get('/', (req, res) => {
+  // console.log(req.session)
   console.log(req.query)
   API.getSearch(req.query).then((body) => {
     return body.list.item.map((item) => item.ndbno)
@@ -24,7 +25,7 @@ router.get('/', (req, res) => {
         object[nutrientID] = nutrient
       })
 
-      /* If there is no energy info add an empty one in */
+      /* If there is no energy info, add an empty one in */
       if(!_.has(object, '208')) {
         object['208'] = { value: 'NO INFO FOUND' }
       }
