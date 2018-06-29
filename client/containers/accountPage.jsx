@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { logIn, logout } from '../actions/authActions'
 
 import TopBar from '../components/topBar'
 import Totals from './totals'
@@ -25,5 +27,20 @@ class AccountPage extends React.Component {
   }
 
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logIn: () => {
+      dispatch()
+    }
+  }
+}
+
 
 export default AccountPage

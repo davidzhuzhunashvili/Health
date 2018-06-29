@@ -7,17 +7,38 @@ router.get('/logout', (req, res) => {
   res.send({ logout: true })
 })
 
-router.get('/auth', (req, res) => {
+router.get('/authenticated', (req, res) => {
   if (req.isAuthenticated()) return res.send({ authenticated: true })
   return res.send({ authenticated: false })
 })
 
-router.post('/login', passport.authenticate('local-login'), (req, res, x) => {
-  console.log('HI');
+router.post('/login', (req, res) => {
+  passport.authenticate('local-login', (err, user, info) => {
+    if (err) return res.send({ success: false, info: { err } })
+    if (!user) return res.send({ sucess: false, info })
+    req.logIn(user, (err) => {
+      if (err) return res.send({ success: false, info: { message: 'Login failed.' } })
+      return res.send({ success: true, info: { message: 'Successful login.' } })
+    })
+  })(req, res)
 })
 
-router.post('/signup', passport.authenticate('local-signup'), (req, res, x) => {
-  console.log('HELLO')
+router.post('/signup', (req, res) => {
+  passport.authenticate('local-signup', (err, user, info) => {
+    if (err) return res.send({ success: false, info: { err } })
+    if (!user) return res.send({ success: false, info })
+
+    return res.send({ success: true, info: { message: 'Successful signup.' }})
+    
+    /* POSSIBLE ADDITION TO AUTO LOGIN AFTER SIGNUP
+    req.login(user, (err) => {
+      if (err) return res.send({ success: false, info: { err } })
+      return res.send({ success: true, info: { message: 'Successful signup.' } })
+    }) 
+    */
+
+  })(req, res)
 })
+
 
 module.exports = router

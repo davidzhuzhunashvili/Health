@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const helpers = require('../helper-functions')
+const helpers = require('../helpers-configs/functions')
 const _ = require('underscore')
 const API = require('../api/api-interface')
 

@@ -11,7 +11,7 @@ module.exports = (passport) => {
   passport.use('local-login', new LocalStrategy(
     (username, password, done) => {
       User.findOne({ username }, (err, user) => {
-        if (!err) { return done(err) }
+        if (err) { return done(err) }
 
         if (!user) {
           return done(null, false, { message: 'Invalid username.' })
@@ -35,7 +35,7 @@ module.exports = (passport) => {
       User.findOne({ username }, (err, user) => {
         if (err) return done(err)
 
-        if (user) return done(null, false, 'Username already exists.')
+        if (user) return done(null, false, { message: 'Username already exists.' })
 
         if (!password || !username) {
           return done(null, false, { message: 'Invalid username or password.' })

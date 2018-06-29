@@ -10,7 +10,8 @@ const mongoose = require('mongoose')
 const databaseURL = process.env.MONGODB
 const User = require('./server/models/user')
 const passport = require('passport')
-const passportSetup = require('./server/routes/passport-setup')
+const passportSetup = require('./server/helpers-configs/passport')
+const authenticated = require('./server/helpers-configs/functions').authenticated
 
 /* Import routes */
 const nutrition = require('./server/routes/nutrition')
@@ -37,27 +38,24 @@ app.use(webpackDevMiddleware(compiler, {
   }
 }))
 
+/* Express sessions setup */
+app.use(expressSession({
+  secret: 'TEMPORARY_SECRET',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { path: '/', httpOnly: true, secure: false, maxAge: null }
+}))
+
 /* Passport initialization */
 app.use(passport.initialize())
 app.use(passport.session())
 passportSetup(passport)
 
 
-/* Express sessions setup */
-const session = expressSession({
-  // CONFIGURE!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  secret: 'TEMPORARY_SECRET',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { path: '/', httpOnly: true, secure: false, maxAge: null }
-})
-
-
-
 /* Routes */
-app.use('/nutrition', session, nutrition)
+app.use('/nutrition', nutrition)
 
-app.use('/auth', session, auth)
+app.use('/auth', auth)
 
 
 app.get('*', (req, res) => { res.sendFile(__dirname + '/www/index.html') })

@@ -7,7 +7,7 @@ import { addCalorie } from '../actions/caloriesActions'
 import { setSelected } from '../actions/selectedActions'
 
 import '../css/searchBox.css'
-import '../css/react-select.css'
+import '../css/react-select-copy.css'
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -44,6 +44,7 @@ class SearchBox extends React.Component {
 
   handleSearchSubmit = (event) => {
     axios.get('/nutrition', { params: { query: this.state.query } }).then((res) => {
+      console.log(res.data)
       if (res.data.length > 0) {
         const calories = res.data[0].nutrients['208'].value
         this.setState({
