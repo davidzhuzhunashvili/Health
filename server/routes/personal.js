@@ -15,7 +15,6 @@ router.put('/itemList', (req, res) => {
         if (dateItem.date === today) {
           includesToday = true
           user.dates[index].nutritionItems = itemList || []
-
         }
       })
       if (!includesToday) {
