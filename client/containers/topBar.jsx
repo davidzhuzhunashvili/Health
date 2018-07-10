@@ -1,6 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { logout } from '../actions/authActions'
 import { withRouter } from 'react-router-dom'
+import axios from 'axios'
 
+import TopBarDropdown from './topBarDropdown'
 
 import '../css/topBar.css'
 
@@ -8,16 +12,12 @@ class TopBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      auth: false
     }
   }
 
   handleHome = (event) => {
     this.props.history.push('/')
-  }
-
-  handleAccount = (event) => {
-    this.props.history.push('/account')
   }
 
   render() {
@@ -30,7 +30,7 @@ class TopBar extends React.Component {
             </div>
 
             <div className='links-right'>
-              <p id='account-link' onClick={this.handleAccount}>Account</p>
+              <TopBarDropdown />
             </div>
           </div>
         </div>
@@ -39,5 +39,10 @@ class TopBar extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
 
-export default withRouter(TopBar)
+export default withRouter(connect(mapStateToProps)(TopBar))

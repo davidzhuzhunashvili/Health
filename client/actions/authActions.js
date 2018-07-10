@@ -1,15 +1,15 @@
-const logIn = () => {
+const login = () => {
   return {
-    type: 'SET',
+    type: 'LOGIN',
     payload: null,
   }
 }
 
-const logOut = () => {
+const logout = () => {
   return {
     type: 'LOGOUT',
-    payload: nul
+    payload: null,
   }
 }
 
-export { logIn, logOut }
+export { login, logout }

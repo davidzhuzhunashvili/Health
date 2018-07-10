@@ -40,6 +40,11 @@ const calorieReducer = (state = { caloriesList: [] }, action) => {
         ]
       }
       break
+    
+    case 'SET_LIST':
+      // SET LIST
+
+      break
   }
 
   return state

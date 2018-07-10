@@ -1,3 +1,7 @@
+.topBar {
+  position: relative;
+}
+
 .links {
   height: 2rem;
   width: 100%;

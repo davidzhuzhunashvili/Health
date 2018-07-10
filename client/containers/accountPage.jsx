@@ -1,31 +1,38 @@
 import React from 'react'
+import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
-import { logIn, logout } from '../actions/authActions'
+import { login, logout } from '../actions/authActions'
 
-import TopBar from '../components/topBar'
+import TopBar from './topBar'
 import Totals from './totals'
 import SearchBox from './searchBox'
 import ItemList from './itemList'
+
+import axios from 'axios'
 
 class AccountPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      auth: 'false'
     }
   }
 
-  render() {
-    return (
-      <div>
-        <TopBar />
-        <Totals /> 
-        <SearchBox /> 
-        <ItemList />
-      </div>
-    )
-  }
 
+  render() {
+    if (!this.props.auth.isLoggedIn) {
+      return <Redirect push to='/login' />
+    } else {
+      return (
+        <div>
+          <TopBar />
+          <Totals />
+          <SearchBox />
+          <ItemList />
+        </div>
+      )
+    }
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -43,4 +50,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default AccountPage
+export default connect(mapStateToProps)(AccountPage)

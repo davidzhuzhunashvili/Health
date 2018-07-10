@@ -12,6 +12,10 @@ router.get('/authenticated', (req, res) => {
   return res.send({ authenticated: false })
 })
 
+router.get('/logout', (req, res) => {
+  req.logout()
+})
+
 router.post('/login', (req, res) => {
   passport.authenticate('local-login', (err, user, info) => {
     if (err) return res.send({ success: false, info: { err } })

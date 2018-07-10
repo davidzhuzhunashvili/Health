@@ -9,12 +9,9 @@ const User = new Schema({
   age: { type: Number, default: 0 },
   gender: String,
   dates: [{
-    date: Date,
+    date: { type: String },
     weight: { type: Number, default: 0 },
-    nutritionItems: [{
-      calories: Number,
-      /* Other nutritional info later */
-    }]
+    nutritionItems: { type: Array, default: [] } 
   }]
 })
 

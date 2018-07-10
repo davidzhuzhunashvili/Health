@@ -6,7 +6,6 @@ const API = require('../api/api-interface')
 
 
 router.get('/', (req, res) => {
-  // console.log(req.session)
   console.log(req.query)
   API.getSearch(req.query).then((body) => {
     return body.list.item.map((item) => item.ndbno)

@@ -90,15 +90,23 @@ class SearchBox extends React.Component {
         info: this.state.searchResults[this.state.selectedOption.value],
         enabled: false
       })
+
+      const putRequest = {
+        itemList: this.props.calories.caloriesList
+      }
+      axios.put('/personal/itemList', putRequest).then((res) => {
+        console.log(res.data)
+      })
     }
     event.preventDefault()
   }
 
-  componentDidMount() {
-    if (this.props.style === 'generic') {
-      this.props.setSelected({ item: '', amount: 100 })
-    }
-  }
+  // DON'T THINK THIS IS NEEDED ANYMORE
+  // componentDidMount() {
+    // if (this.props.style === 'generic') {
+      // this.props.setSelected({ item: '', amount: 100 })
+    // }
+  // }
 
   render() {
     const options = this.state.searchResults.map((item, index) => {
@@ -113,7 +121,8 @@ class SearchBox extends React.Component {
           <div className='column-0'>
             <div className='search-container'>
               <form onSubmit={this.handleSearchSubmit}>
-                <input id='search-input' type='text' autoComplete='off' placeholder='Search...' name='search' value={this.state.query} onChange={this.handleSearchChange} />
+                <input id='search-input' type='text' autoComplete='off' placeholder='Search...' 
+                name='search' value={this.state.query} onChange={this.handleSearchChange} />
                 <button id='search-button' type='submit'>
                   <i className="fa fa-search"></i>
                 </button>
@@ -134,20 +143,22 @@ class SearchBox extends React.Component {
           </div>
           <div className='column-1'>
             <div className='nutrition-info'>
-                {(typeof this.state.calories === 'number' && !isNaN(this.state.calories)) ?
-                  <div id='calories'>
-                    <p id='calories-value'>{Math.round(this.state.amount * this.state.calories * 100) / 100}</p>
-                    <p id='calories-word'>calories</p>
-                  </div>
-                  : 
-                  <div id='calories'>
-                    <p id='dashes'>---</p>
-                  </div>}
+              {(typeof this.state.calories === 'number' && !isNaN(this.state.calories)) ?
+                <div id='calories'>
+                  <p id='calories-value'>{Math.round(this.state.amount * this.state.calories * 100) / 100}</p>
+                  <p id='calories-word'>calories</p>
+                </div>
+                :
+                <div id='calories'>
+                  <p id='dashes'>---</p>
+                </div>}
             </div>
 
             <div className='amount'>
               <form onSubmit={this.handlePlusSubmit}>
-                <input id={(this.props.style !== 'generic') ? 'amount-input' : 'amount-input-generic'} type='number' autoComplete='off' min='0' max='10000' name='search' value={this.state.amount} onChange={this.handleAmountChange} />
+                <input id={(this.props.style !== 'generic') ? 'amount-input' : 'amount-input-generic'}
+                  type='number' autoComplete='off' min='0' max='10000' name='search'
+                  value={this.state.amount} onChange={this.handleAmountChange} />
                 <p>g</p>
                 {(this.props.style !== 'generic') ?
                   <button id='plus-button' type='submit'>

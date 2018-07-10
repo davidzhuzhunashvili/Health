@@ -5,12 +5,12 @@ import { setSelected } from '../actions/selectedActions'
 
 import GenericSearchBox from './genericSearchBox'
 import Totals from './totals'
-import TopBar from '../components/topBar'
+import TopBar from './topBar'
 import Description from '../components/description'
 
 // TEMPORARY
 import Test from '../components/test'
-import LogInForm from './logInForm'
+import LoginForm from './loginForm'
 
 import '../css/landingPage.css'
 
@@ -29,7 +29,7 @@ class LandingPage extends React.Component {
           <Description item={this.props.selected} />
         </div>
 
-        <LogInForm />
+        {/* <LoginForm /> */}
 
 
       </div>

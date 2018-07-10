@@ -21,11 +21,11 @@ class Totals extends React.Component {
     return (
       <div className='totals'>
         <div className='total-container'>
-          <p>Total: {totalCals}</p>
+          <p>Total: {totalCals} calories</p>
         </div>
 
         <div className='remaining-container'>
-          <p>Remaining: {remainingCals}</p>
+          <p>Remaining: {remainingCals} calories</p>
         </div>
       </div>
     )

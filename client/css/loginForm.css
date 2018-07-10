@@ -1,0 +1,92 @@
+.loginForm {
+  position: relative;
+  height: calc(100% - 2rem);
+  /* background: rgb(115, 109, 138); */
+}
+
+#login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3rem; 
+  background: rgb(128, 130, 255);
+  height: 30rem;
+  width: 30%;
+  border-radius: 5px;
+  box-shadow: 0 0 40px 2px rgba(96, 96, 96, 0.644);
+}
+
+#inputs-container {
+  position: absolute;
+  background: none;
+  /* padding: 2rem; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* height: 26rem; */
+  width: calc(100% - 4rem);
+}
+
+#login-header p {
+  font-weight: bold;
+  font-size: 3rem;
+  text-align: center;
+  color: white;
+  margin-top: 0;
+}
+
+#username-input {
+  height: 2.5rem;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 3pt;
+  border-color: white;
+  border-style: solid;
+  padding-left: 6px; 
+  background: none;
+  color: white;
+  vertical-align: center;
+}
+
+#password-input {
+  height: 2.5rem;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 3pt;
+  border-color: white;
+  border-style: solid;
+  padding: 6px;
+  background: none;
+  color: white;
+  vertical-align: center;
+}
+
+#login-button {
+  width: 100%;
+  height: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: white;
+  border: none;
+  background-color: rgb(39, 158, 255)
+}
+
+.loginForm input:focus {
+  outline: none;
+}
+
+/* PLACEHOLDER STUFF */
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: white;
+}

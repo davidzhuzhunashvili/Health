@@ -1,13 +1,17 @@
 import React from 'react'
+import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
-import { logIn, logout } from '../actions/authActions'
+import { login, logout } from '../actions/authActions'
+import axios from 'axios'
 
-import TopBar from '../components/topBar'
+import TopBar from './topBar'
 import Totals from './totals'
 import SearchBox from './searchBox'
 import ItemList from './itemList'
 
-class LogInForm extends React.Component {
+import '../css/loginForm.css'
+
+class LoginForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,34 +28,57 @@ class LogInForm extends React.Component {
     this.setState({ password: event.target.value })
   }
 
-
-
-
   handleLoginSubmit = (event) => {
-    console.log('HELLO')
     event.preventDefault()
-  }
 
-  
+    const postRequest = {
+      username: this.state.username,
+      password: this.state.password
+    }
+    axios.post('/auth/login', postRequest).then((res) => {
+      if (res.data.success) {
+        this.props.login()
+      } else {
+        this.props.logout()
+      }
+    })
+  }
 
   render() {
-    console.log(this.state)
+    // if (this.props.auth.isLoggedIn) {
+    // return <Redirect push to='/account' />
+    // } else {
     return (
-      <div>
-        <form onSubmit={this.handleLoginSubmit}>
-          <input type='text' autoComplete='off' placeholder='Username' name='username' 
-          value={this.state.username} onChange={this.handleUsernameChange} />
-        </form>
+      <div className='loginForm'>
+        <div id='login-container'>
 
-        <form onSubmit={this.handleLoginSubmit}>
-          <input type='password' autoComplete='off' placeholder='Password' name='password' 
-          value={this.state.password} onChange={this.handlePasswordChange} />
-        </form>
 
+
+          <div id='inputs-container'>
+
+            <div id='login-header'>
+              <p>LOGIN</p>
+            </div>
+
+            <form onSubmit={this.handleLoginSubmit}>
+              <input id='username-input' type='text' autoComplete='off' placeholder='USERNAME' name='username'
+                value={this.state.username} onChange={this.handleUsernameChange} />
+            </form>
+
+            <form onSubmit={this.handleLoginSubmit}>
+              <input id='password-input' type='password' autoComplete='off' placeholder='PASSWORD' name='password'
+                value={this.state.password} onChange={this.handlePasswordChange} />
+            </form>
+
+            <button id='login-button' type='button' onClick={this.handleLoginSubmit}>
+              LOGIN
+              </button>
+          </div>
+        </div>
       </div>
     )
+    // }
   }
-
 }
 
 const mapStateToProps = (state) => {
@@ -62,14 +89,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logIn: () => {
-      dispatch(logIn())
+    login: () => {
+      dispatch(login())
     },
-    logOut: () => {
-      dispatch(logOut())
+    logout: () => {
+      dispatch(logout())
     }
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogInForm)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

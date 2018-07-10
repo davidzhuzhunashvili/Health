@@ -16,8 +16,10 @@ const authenticated = require('./server/helpers-configs/functions').authenticate
 /* Import routes */
 const nutrition = require('./server/routes/nutrition')
 const auth = require('./server/routes/auth')
+const personal = require('./server/routes/personal')
 
 /* Mongoose setup */
+mongoose.Promise = Promise
 mongoose.connect(databaseURL)
 mongoose.connection.once('open', () => { console.log('Connected to Database!') })
 
@@ -52,11 +54,13 @@ app.use(passport.session())
 passportSetup(passport)
 
 
-/* Routes */
+/* Public routes */
 app.use('/nutrition', nutrition)
 
 app.use('/auth', auth)
 
+/* Authorized routes */
+app.use('/personal', authenticated, personal)
 
 app.get('*', (req, res) => { res.sendFile(__dirname + '/www/index.html') })
 app.listen(process.argv[2] || 3000, () => {

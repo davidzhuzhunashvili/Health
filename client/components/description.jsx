@@ -8,11 +8,14 @@ const Description = (props) => {
     const name = props.item.item.name
     const amount = parseInt(props.item.amount || 0) / 100
 
-    const [protein, sugars, fibers, sodium] = [
+    console.log(nutrients)
+    const [protein, sugars, fibers, sodium, carbs] = [
       `${(Math.round(nutrients[203].value * amount * 100) / 100).toFixed(2)}${nutrients[203].unit}`,
       `${(Math.round(nutrients[269].value * amount * 100) / 100).toFixed(2)}${nutrients[269].unit}`,
       `${(Math.round(nutrients[291].value * amount * 100) / 100).toFixed(2)}${nutrients[291].unit}`,
-      `${(Math.round(nutrients[307].value * amount * 100) / 100).toFixed(2)}${nutrients[307].unit}`]
+      `${(Math.round(nutrients[307].value * amount * 100) / 100).toFixed(2)}${nutrients[307].unit}`,
+      `${(Math.round(nutrients[205].value * amount * 100) / 100).toFixed(2)}${nutrients[205].unit}`
+    ]
 
     return (
       <div className='description'>
@@ -20,6 +23,9 @@ const Description = (props) => {
           <div className='left'>
             <p className='left-align'>Protein: </p>
             <p className='right-align'>{protein}</p>
+
+            <p className='left-align'>Carbohydrates: </p>
+            <p className='right-align'>{carbs}</p>
 
             <p className='left-align'>Sugars: </p>
             <p className='right-align'>{sugars}</p>
@@ -35,13 +41,13 @@ const Description = (props) => {
         </div>
       </div>
     )
-  } else {
-    return (
-      <div>
-
-      </div>
-    )
   }
+  return (
+    <div>
+
+    </div>
+  )
+
 }
 
 export default Description
